@@ -1,0 +1,51 @@
+* { box-sizing: border-box;}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #777;
+    color: #fff;
+}
+
+h1 {
+    color: #663399;
+    text-shadow: 3px 3px 3px #000;
+}
+
+h2, .text, .site-link {
+    color: #639;
+}
+
+label {
+    color: #639;
+}
+
+p {
+    font-size: 26px;
+}
+
+.header {
+    padding: 10px 0;
+}
+
+.main {
+    padding: 20px 0;
+}
+
+.footer {
+    padding: 10px 0;
+}
+
+.section {
+    margin-bottom: 40px;
+    padding: 10px 5px; 
+    background-color: #fff;
+    border: 3px solid #663399;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #639;
+}
+
+#addTaskBtn, #completedBtn {
+    color: #fff;
+    background-color: #663399;
+}
