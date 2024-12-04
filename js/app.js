@@ -119,48 +119,27 @@ completedBtn.addEventListener('click', (e)=> {
 const validateCompletedTasks =()=> {
     let completedArray = []
     const checkboxes = document.querySelectorAll('.checkbox')
-    const allTasks = document.querySelectorAll('.task-label')
-
+    
     // testing...
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked && (checkboxes[i].getAttribute('data-id') == taskArray[i].id)) {
+            taskArray[i] = {
+                ...taskArray[i],
+                isCompleted: true,
+                dateCompleted: new Date().toString()
+            } 
+        }
+    }
 
     for (let i = 0; i < taskArray.length; i++) {
-        // console.log(taskArray[i].isCompleted)
-        // let isComplete = taskArray[i].isCompleted // t or f
-        for (let j = 0; j < checkboxes.length; i++) {
 
-            // console.log(taskArray[i].id, checkboxes[j].getAttribute('data-id'))
-            if (taskArray[i].id == parseFloat(checkboxes[j].getAttribute('data-id'))) {
-                console.log(taskArray[i].task)
-                if (checkboxes[j].checked) {
-                    let dateCompleted = new Date()
-
-                    taskArray[i] = {
-                        ...taskArray[i],
-                        isCompleted: checkboxes[j].checked,
-                        dateCompleted: dateCompleted.toString()
-                    }
-                }
-
-                // for (let i = 0; i < taskArray.length; i++) {
-                    // let isComplete =  taskArray[i].isCompleted
-
-                    // isComplete = !isComplete
-
-                }
-
-
-                allTasks[i].classList.add('text-success')
-                completedArray = [...completedArray, allTasks[i].innerText]
-                
-            }
+        if (taskArray[i].isCompleted) {
+            completedArray = [...completedArray, taskArray[i]]
         }
-
-    console.log(taskArray)
-
+    }
     // end testing...SUCCESS!!
 
     completedTasks.innerText = completedArray.length
-    // console.log(completedArray)
     makeCompleteItem(completedArray)
 }
 
@@ -168,11 +147,12 @@ const validateCompletedTasks =()=> {
 const makeCompleteItem =(arr)=> {
 
     arr.forEach(item => {
-        const task = item
+        const task = item.task
+        const dateCompleted = item.dateCompleted
 
         const completedItem = document.createElement('li')
         completedItem.classList.add('list-group-item', 'text-success', 'text-capitalize', 'completed-item')
-        completedItem.innerText = task
+        completedItem.innerText = `${task} | completed: ${dateCompleted}`
 
         completedList.appendChild(completedItem)
     })
