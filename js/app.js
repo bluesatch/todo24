@@ -16,8 +16,14 @@ const completedBtn = document.getElementById('completedBtn')
 const completedList = document.getElementById('completedList')
 const completedTasks = document.getElementById('completedTasks')
 
+// testing make task item
+let prevItem
+let currentItem
+
 // array of tasks
 let taskArray = []
+
+let completedArray = []
 
 /**
  * let task = {
@@ -126,7 +132,7 @@ completedBtn.addEventListener('click', (e)=> {
 
 // validate checked tasks
 const validateCompletedTasks =()=> {
-    let completedArray = []
+    // let completedArray = []
     const checkboxes = document.querySelectorAll('.checkbox')
 
     // testing...
@@ -142,27 +148,38 @@ const validateCompletedTasks =()=> {
 
     for (let i = 0; i < taskArray.length; i++) {
 
-        if (taskArray[i].isCompleted) {
+        if (taskArray[i].isCompleted && !completedArray.includes(taskArray[i].id)) {
+
+            // testing 
             completedArray = [...completedArray, taskArray[i]]
+
+            checkboxes[i].disabled = true
+            makeCompleteItem(taskArray[i])
+
         }
     }
     // end testing...SUCCESS!!
-
+    console.log(completedArray)
     completedTasks.innerText = completedArray.length
-    makeCompleteItem(completedArray)
 }
 
 // make li for completedList
-const makeCompleteItem =(arr)=> {
+const makeCompleteItem =(obj)=> {
 
-    arr.forEach(item => {
-        const task = item.task
-        const dateCompleted = item.dateCompleted
+        const task = obj.task
+        const dateCompleted = obj.dateCompleted
 
         const completedItem = document.createElement('li')
         completedItem.classList.add('list-group-item', 'text-success', 'text-capitalize', 'completed-item')
         completedItem.innerText = `${task} | completed: ${dateCompleted}`
+    
+        // testing...
+        currentItem = task 
 
-        completedList.appendChild(completedItem)
-    })
+        if (currentItem !== prevItem) {
+            completedList.appendChild(completedItem)
+            prevItem = currentItem
+            return 
+        } 
+    
 }
