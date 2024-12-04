@@ -39,15 +39,24 @@ addTaskBtn.addEventListener('click', (e)=> {
 
 // take input
 const validateInput =()=> {
-    
 
-    // if (taskInput.value === '') {
-    //     alert('Please enter a task before submitting')
-    // } else {
-    //     makeTask(taskInput.value)
-    // }
+    // testing...
+    if (taskInput.value === '') {
+        alert('Please enter a task before submitting')
+    } else {
 
-    taskInput.value === ''  ? alert('Please enter a task before submitting') : makeTask(taskInput.value)
+        for (let i = 0; i < taskArray.length; i++) {
+            if (taskInput.value == taskArray[i].task) {
+                alert('Task has already been added')
+                taskInput.value = ''
+                return
+            } 
+        }
+        makeTask(taskInput.value)
+    }
+    // end testing...SUCCESS!
+
+    // taskInput.value === ''  ? alert('Please enter a task before submitting') : makeTask(taskInput.value)
 
     taskInput.value = ''
 }
@@ -119,7 +128,7 @@ completedBtn.addEventListener('click', (e)=> {
 const validateCompletedTasks =()=> {
     let completedArray = []
     const checkboxes = document.querySelectorAll('.checkbox')
-    
+
     // testing...
     for (let i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked && (checkboxes[i].getAttribute('data-id') == taskArray[i].id)) {
